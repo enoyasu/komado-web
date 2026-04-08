@@ -1,0 +1,206 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  guest
+  user
+  creator
+  moderator
+  admin
+}
+
+enum UserStatus {
+  active
+  suspended
+}
+
+enum WorkStatus {
+  draft
+  published
+  hidden
+}
+
+enum ChapterStatus {
+  draft
+  scheduled
+  published
+  hidden
+}
+
+model User {
+  id             String           @id @default(cuid())
+  email          String           @unique
+  handle         String           @unique
+  displayName    String
+  avatarUrl      String?
+  role           UserRole         @default(user)
+  status         UserStatus       @default(active)
+  creatorProfile CreatorProfile?
+  works          Work[]
+  follows        Follow[]
+  bookmarks      Bookmark[]
+  readingLogs    ReadingProgress[]
+  reports        Report[]         @relation("Reporter")
+  resolvedReport Report[]         @relation("Resolver")
+  auditLogs      AuditLog[]
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+}
+
+model CreatorProfile {
+  userId    String   @id
+  penName   String
+  bio       String?
+  links     Json?
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Work {
+  id            String     @id @default(cuid())
+  creatorId     String
+  title         String
+  slug          String     @unique
+  description   String
+  coverImageKey String?
+  status        WorkStatus @default(draft)
+  visibility    String     @default("public")
+  ageRating     String     @default("all")
+  language      String     @default("ja")
+  isCompleted   Boolean    @default(false)
+  publishedAt   DateTime?
+  creator       User       @relation(fields: [creatorId], references: [id], onDelete: Cascade)
+  chapters      Chapter[]
+  tags          WorkTag[]
+  follows       Follow[]
+  bookmarks     Bookmark[]
+  progress      ReadingProgress[]
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+}
+
+model Chapter {
+  id            String        @id @default(cuid())
+  workId         String
+  chapterNumber  Int
+  title          String
+  slug           String
+  summary        String?
+  status         ChapterStatus @default(draft)
+  scheduledAt    DateTime?
+  publishedAt    DateTime?
+  work           Work          @relation(fields: [workId], references: [id], onDelete: Cascade)
+  pages          ChapterPage[]
+  readingLogs    ReadingProgress[]
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+
+  @@unique([workId, slug])
+}
+
+model ChapterPage {
+  id         String   @id @default(cuid())
+  chapterId  String
+  pageIndex  Int
+  imageKey   String
+  width      Int?
+  height     Int?
+  chapter    Chapter  @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+  createdAt  DateTime @default(now())
+
+  @@unique([chapterId, pageIndex])
+}
+
+model Tag {
+  id        String   @id @default(cuid())
+  name      String
+  slug      String   @unique
+  works     WorkTag[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model WorkTag {
+  workId String
+  tagId  String
+  work   Work @relation(fields: [workId], references: [id], onDelete: Cascade)
+  tag    Tag  @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@id([workId, tagId])
+}
+
+model Follow {
+  userId    String
+  workId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  work      Work     @relation(fields: [workId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@id([userId, workId])
+}
+
+model Bookmark {
+  userId    String
+  workId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  work      Work     @relation(fields: [workId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@id([userId, workId])
+}
+
+model ReadingProgress {
+  userId        String
+  workId        String
+  chapterId     String
+  pageIndex     Int     @default(0)
+  progressRatio Float   @default(0)
+  user          User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  work          Work    @relation(fields: [workId], references: [id], onDelete: Cascade)
+  chapter       Chapter @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+  updatedAt     DateTime @updatedAt
+
+  @@id([userId, workId])
+}
+
+model Report {
+  id         String   @id @default(cuid())
+  reporterId String?
+  targetType String
+  targetId   String
+  reason     String
+  note       String?
+  status     String   @default("open")
+  resolvedBy String?
+  resolvedAt DateTime?
+  reporter   User?    @relation("Reporter", fields: [reporterId], references: [id], onDelete: SetNull)
+  resolver   User?    @relation("Resolver", fields: [resolvedBy], references: [id], onDelete: SetNull)
+  createdAt  DateTime @default(now())
+}
+
+model Notification {
+  id        String   @id @default(cuid())
+  userId    String
+  type      String
+  payload   Json
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model AuditLog {
+  id         String   @id @default(cuid())
+  actorId    String?
+  action     String
+  targetType String
+  targetId   String
+  metadata   Json?
+  actor      User?    @relation(fields: [actorId], references: [id], onDelete: SetNull)
+  createdAt  DateTime @default(now())
+}

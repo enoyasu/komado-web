@@ -1,0 +1,98 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #f8fafc;
+  --fg: #0f172a;
+  --card: #ffffff;
+  --line: #dbe3ef;
+  --brand: #0a5ea8;
+  --brand-soft: #e0effe;
+  --accent: #ef4444;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: radial-gradient(circle at 20% 0%, #ffffff 0%, #eff6ff 45%, #f8fafc 100%);
+  color: var(--fg);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.main-container {
+  width: min(1100px, 100% - 2rem);
+  margin-inline: auto;
+}
+
+.section-title {
+  font-size: clamp(1.25rem, 1.8vw, 1.75rem);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.card {
+  border: 1px solid var(--line);
+  background: var(--card);
+  border-radius: 1rem;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
+}
+
+.pill {
+  display: inline-flex;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  border: 1px solid #c7daf0;
+  background: var(--brand-soft);
+  color: #0b3f6d;
+  padding: 0.2rem 0.7rem;
+  align-items: center;
+}
+
+.primary-btn {
+  border-radius: 999px;
+  background: var(--brand);
+  color: white;
+  font-weight: 600;
+  border: none;
+  padding: 0.55rem 1rem;
+  cursor: pointer;
+}
+
+.secondary-btn {
+  border-radius: 999px;
+  background: white;
+  color: #0f172a;
+  font-weight: 600;
+  border: 1px solid var(--line);
+  padding: 0.55rem 1rem;
+  cursor: pointer;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.form-field input,
+.form-field textarea,
+.form-field select {
+  width: 100%;
+  border-radius: 0.7rem;
+  border: 1px solid #c9d8ec;
+  background: #fff;
+  padding: 0.7rem 0.8rem;
+}
