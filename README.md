@@ -49,6 +49,7 @@ pnpm install
 
 2. 環境変数作成
 ```bash
+cp .env.example .env
 cp .env.example .env.local
 ```
 

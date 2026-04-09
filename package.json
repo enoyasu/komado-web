@@ -12,9 +12,9 @@
     "test": "pnpm test:unit && pnpm test:e2e",
     "test:unit": "vitest run",
     "test:e2e": "playwright test",
-    "db:generate": "prisma generate",
-    "db:migrate": "prisma migrate dev",
-    "db:seed": "tsx db/seed.ts",
+    "db:generate": "env -u DATABASE_URL prisma generate",
+    "db:migrate": "env -u DATABASE_URL prisma migrate dev",
+    "db:seed": "env -u DATABASE_URL DOTENV_CONFIG_PATH=.env DOTENV_CONFIG_OVERRIDE=true tsx -r dotenv/config db/seed.ts",
     "format": "prettier --write ."
   },
   "dependencies": {
@@ -31,6 +31,7 @@
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
     "@vitest/coverage-v8": "^3.2.4",
+    "dotenv": "^16.6.1",
     "eslint": "^9.22.0",
     "eslint-config-next": "16.2.3",
     "prettier": "^3.5.3",
