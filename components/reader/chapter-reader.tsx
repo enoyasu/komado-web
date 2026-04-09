@@ -10,6 +10,8 @@ type ChapterReaderProps = {
   chapterTitle: string;
   pageImages: string[];
   nextChapterPath?: string;
+  isPreview?: boolean;
+  lockedMessage?: string;
 };
 
 export function ChapterReader({
@@ -18,6 +20,8 @@ export function ChapterReader({
   chapterTitle,
   pageImages,
   nextChapterPath,
+  isPreview = false,
+  lockedMessage,
 }: ChapterReaderProps) {
   const storageKey = useMemo(
     () => `komado:progress:${workSlug}:${chapterSlug}`,
@@ -55,7 +59,9 @@ export function ChapterReader({
         <p className="pill mb-2">縦スクロールビューア</p>
         <h1 className="text-xl font-bold">{chapterTitle}</h1>
         <p className="mt-2 text-sm text-slate-600">
-          読書位置はブラウザ内に保存され、次回は「続きから読む」導線で再開できます。
+          {isPreview
+            ? "この話は無料範囲のみ表示しています。購入または応援で続きを読めます。"
+            : "読書位置はブラウザ内に保存され、次回は「続きから読む」導線で再開できます。"}
         </p>
       </header>
 
@@ -73,12 +79,18 @@ export function ChapterReader({
         ))}
       </div>
 
+      {isPreview && lockedMessage ? (
+        <div className="card border-amber-300 bg-amber-50 p-4 text-sm text-amber-900">
+          {lockedMessage}
+        </div>
+      ) : null}
+
       <footer className="card flex flex-col gap-3 p-5 sm:flex-row sm:items-center sm:justify-between">
         <p className="text-sm text-slate-600">読了後はフォローやシェアで作者を応援できます。</p>
         <div className="flex gap-2">
-          <button className="secondary-btn" type="button" onClick={() => window.alert("共有導線サンプル") }>
-            共有する
-          </button>
+          <Link href={`/works/${workSlug}`} className="secondary-btn">
+            共有導線へ
+          </Link>
           {nextChapterPath ? (
             <Link href={nextChapterPath} className="primary-btn">
               次の話へ

@@ -29,6 +29,35 @@ export default function NewWorkPage() {
             </select>
           </div>
         </div>
+        <div className="grid gap-4 sm:grid-cols-2">
+          <div className="form-field">
+            <label htmlFor="chapterPrice">1話買い切り価格（円）</label>
+            <input id="chapterPrice" type="number" min={0} defaultValue={70} />
+          </div>
+          <div className="form-field">
+            <label htmlFor="bookPrice">1冊買い切り価格（円）</label>
+            <input id="bookPrice" type="number" min={0} defaultValue={580} />
+          </div>
+        </div>
+        <div className="grid gap-4 sm:grid-cols-2">
+          <div className="form-field">
+            <label htmlFor="tipEnabled">投げ銭 / 応援</label>
+            <select id="tipEnabled" defaultValue="enabled">
+              <option value="enabled">有効</option>
+              <option value="disabled">無効</option>
+            </select>
+          </div>
+          <div className="form-field">
+            <label htmlFor="weakAds">無料話の弱い広告</label>
+            <select id="weakAds" defaultValue="enabled">
+              <option value="enabled">有効（バナー1枠）</option>
+              <option value="disabled">無効</option>
+            </select>
+          </div>
+        </div>
+        <p className="rounded-lg border border-slate-200 bg-slate-50 p-3 text-sm text-slate-700">
+          手数料はプラットフォーム 10〜15%帯で自動計算されます。
+        </p>
         <div className="form-field">
           <label htmlFor="cover">カバー画像</label>
           <input id="cover" type="file" accept="image/png,image/jpeg,image/webp" />

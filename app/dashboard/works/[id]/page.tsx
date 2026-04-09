@@ -35,6 +35,20 @@ export default async function DashboardWorkEditPage({ params }: { params: Promis
             <input id="scheduledAt" type="datetime-local" />
           </div>
         </div>
+        <div className="grid gap-4 sm:grid-cols-2">
+          <div className="form-field">
+            <label htmlFor="chapterPrice">1話買い切り価格（円）</label>
+            <input id="chapterPrice" type="number" min={0} defaultValue={work.chapterPriceYen} />
+          </div>
+          <div className="form-field">
+            <label htmlFor="bookPrice">1冊買い切り価格（円）</label>
+            <input id="bookPrice" type="number" min={0} defaultValue={work.bookPriceYen} />
+          </div>
+        </div>
+        <p className="rounded-lg border border-slate-200 bg-slate-50 p-3 text-sm text-slate-700">
+          手数料: {Math.round(work.platformFeeRate * 100)}% / 投げ銭: {work.tipEnabled ? "有効" : "無効"} /
+          無料話広告: {work.weakAdsEnabled ? "有効" : "無効"}
+        </p>
       </section>
 
       <section className="card p-5">

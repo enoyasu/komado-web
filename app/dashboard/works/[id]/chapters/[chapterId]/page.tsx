@@ -44,6 +44,24 @@ export default async function DashboardChapterEditPage({
           <label htmlFor="files">漫画ページ画像（複数アップロード）</label>
           <input id="files" type="file" multiple accept="image/png,image/jpeg,image/webp" />
         </div>
+        <div className="grid gap-4 sm:grid-cols-3">
+          <div className="form-field">
+            <label htmlFor="accessModel">公開モデル</label>
+            <select id="accessModel" defaultValue={chapter.accessModel}>
+              <option value="free_full">1話まるごと無料</option>
+              <option value="partial_preview">一部無料</option>
+              <option value="paid">買い切り</option>
+            </select>
+          </div>
+          <div className="form-field">
+            <label htmlFor="freePageCount">無料ページ数</label>
+            <input id="freePageCount" type="number" min={1} defaultValue={chapter.freePageCount} />
+          </div>
+          <div className="form-field">
+            <label htmlFor="chapterPrice">価格（円）</label>
+            <input id="chapterPrice" type="number" min={0} defaultValue={chapter.chapterPriceYen} />
+          </div>
+        </div>
         <div className="rounded-lg border border-dashed border-slate-300 bg-slate-50 p-3 text-sm text-slate-600">
           ページ順はドラッグで変更可能（MVPでは並び替えUIのプレースホルダー）。
         </div>
