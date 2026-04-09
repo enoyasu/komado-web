@@ -8,7 +8,7 @@ export function SiteFooter() {
         <div className="flex gap-4">
           <Link href="/works">作品一覧</Link>
           <Link href="/dashboard">作者ダッシュボード</Link>
-          <Link href="/admin/reports">通報対応</Link>
+          <Link href="/works/sample-work">作品ページから通報</Link>
         </div>
       </div>
     </footer>

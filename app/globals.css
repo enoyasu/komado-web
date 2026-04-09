@@ -1,12 +1,13 @@
 @import "tailwindcss";
 
 :root {
-  --bg: #f8fafc;
-  --fg: #0f172a;
+  --bg: #f3f7fb;
+  --fg: #0b1220;
+  --muted: #334155;
   --card: #ffffff;
-  --line: #dbe3ef;
+  --line: #c9d6e6;
   --brand: #0a5ea8;
-  --brand-soft: #e0effe;
+  --brand-soft: #dcecff;
   --accent: #ef4444;
 }
 
@@ -18,8 +19,11 @@ html,
 body {
   margin: 0;
   padding: 0;
-  background: radial-gradient(circle at 20% 0%, #ffffff 0%, #eff6ff 45%, #f8fafc 100%);
+  min-height: 100%;
+  color-scheme: light;
+  background: radial-gradient(circle at 20% 0%, #ffffff 0%, #e9f2ff 40%, #f3f7fb 100%);
   color: var(--fg);
+  line-height: 1.65;
 }
 
 a {
@@ -47,7 +51,7 @@ img {
   border: 1px solid var(--line);
   background: var(--card);
   border-radius: 1rem;
-  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
+  box-shadow: 0 12px 24px rgba(8, 15, 34, 0.07);
 }
 
 .pill {
@@ -74,7 +78,7 @@ img {
 .secondary-btn {
   border-radius: 999px;
   background: white;
-  color: #0f172a;
+  color: var(--fg);
   font-weight: 600;
   border: 1px solid var(--line);
   padding: 0.55rem 1rem;
@@ -92,7 +96,33 @@ img {
 .form-field select {
   width: 100%;
   border-radius: 0.7rem;
-  border: 1px solid #c9d8ec;
+  border: 1px solid var(--line);
   background: #fff;
+  color: var(--fg);
   padding: 0.7rem 0.8rem;
+}
+
+.form-field input::placeholder,
+.form-field textarea::placeholder {
+  color: #64748b;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 3px solid #7cb4ff;
+  outline-offset: 2px;
+}
+
+.hero-panel {
+  border: 1px solid #0f3960;
+  background: linear-gradient(115deg, #0b355a 0%, #0a5ea8 60%, #1a74bf 100%);
+  color: #ffffff;
+}
+
+.hero-description {
+  color: rgba(255, 255, 255, 0.96);
+  text-wrap: pretty;
 }

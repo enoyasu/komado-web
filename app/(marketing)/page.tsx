@@ -14,10 +14,10 @@ export default function HomePage() {
 
   return (
     <div className="space-y-12 py-8">
-      <section className="main-container card overflow-hidden border-none bg-gradient-to-r from-sky-900 to-blue-800 p-8 text-white">
-        <p className="mb-2 text-sm opacity-90">公開Web漫画プラットフォーム</p>
+      <section className="main-container card hero-panel overflow-hidden p-8">
+        <p className="mb-2 text-sm font-semibold tracking-wide">公開Web漫画プラットフォーム</p>
         <h1 className="mb-4 text-3xl font-bold md:text-4xl">スマホで読みやすく、作者が投稿しやすい。</h1>
-        <p className="max-w-2xl text-sm text-blue-100 md:text-base">
+        <p className="hero-description max-w-2xl text-base leading-relaxed">
           komadoは、iPhone / Android / PC ブラウザで読める個人漫画の公開サイトです。検索・SNS・共有リンクから読者が流入し、ログインなしでも作品を読めます。
         </p>
         <div className="mt-6 flex flex-wrap gap-3">

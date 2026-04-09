@@ -9,5 +9,5 @@
 ## 実装済みの土台
 - アップロード入力検証: `server/uploads/validation.ts`
 - 認可ヘルパー: `server/permissions/index.ts`
-- 管理導線の分離: `/admin/*`
+- 管理導線の分離: `/admin/*` は外部管理アプリへリダイレクト
 - 通報導線の配置: 作品詳細ページ

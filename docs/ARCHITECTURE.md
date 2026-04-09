@@ -10,7 +10,7 @@
 - `app/(marketing)`: 公開ページ
 - `app/(auth)`: 認証ページ
 - `app/dashboard`: 作者導線
-- `app/admin`: 管理導線
+- `app/admin`: 外部管理URLへのリダイレクト導線
 - `components/`: UI部品
 - `lib/`: 共有ロジックとメタデータ
 - `server/`: 権限制御・検証

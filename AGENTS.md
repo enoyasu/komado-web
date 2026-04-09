@@ -62,10 +62,8 @@
 - `/dashboard/works/[id]/chapters/[chapterId]`
 
 ### 管理
-- `/admin`
-- `/admin/reports`
-- `/admin/works`
-- `/admin/users`
+- 管理画面は別URLに移管
+- `/admin` と `/admin/*` は外部管理URLへ転送
 
 ## SEO要件
 - title / description / canonical

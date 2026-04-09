@@ -6,7 +6,6 @@ const links = [
   { href: "/tags/%E6%97%A5%E5%B8%B8", label: "タグ" },
   { href: "/library", label: "ライブラリ" },
   { href: "/dashboard", label: "投稿" },
-  { href: "/admin", label: "運営" },
 ];
 
 export function SiteHeader() {
