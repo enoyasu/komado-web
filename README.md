@@ -72,6 +72,10 @@ pnpm db:seed
 ```bash
 pnpm dev
 ```
+Turbopack キャッシュエラーが出る場合は次を実行してください。
+```bash
+pnpm dev:reset
+```
 
 ## ローカル確認URL
 - Home: `http://localhost:3000/`

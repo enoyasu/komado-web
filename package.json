@@ -4,7 +4,9 @@
   "private": true,
   "packageManager": "pnpm@10.6.3",
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --webpack",
+    "dev:turbo": "next dev --turbopack",
+    "dev:reset": "rm -rf .next && next dev --webpack",
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
