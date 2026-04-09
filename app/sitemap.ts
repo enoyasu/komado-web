@@ -5,7 +5,7 @@ const baseUrl = process.env.APP_URL ?? "http://localhost:3000";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const works = getPublishedWorks();
-  const marketingRoutes = ["", "/works", "/login", "/signup"];
+  const marketingRoutes = ["", "/works", "/readers", "/creators", "/login", "/signup"];
 
   const staticRoutes = marketingRoutes.map((path) => ({
     url: `${baseUrl}${path}`,

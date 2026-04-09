@@ -56,6 +56,38 @@ img {
   margin-inline: auto;
 }
 
+.text-slate-500 {
+  color: color-mix(in srgb, var(--fg) 58%, var(--bg) 42%);
+}
+
+.text-slate-600 {
+  color: color-mix(in srgb, var(--fg) 68%, var(--bg) 32%);
+}
+
+.text-slate-700 {
+  color: color-mix(in srgb, var(--fg) 78%, var(--bg) 22%);
+}
+
+.text-slate-800 {
+  color: color-mix(in srgb, var(--fg) 88%, var(--bg) 12%);
+}
+
+.text-blue-700 {
+  color: color-mix(in srgb, var(--brand) 82%, var(--fg) 18%);
+}
+
+.bg-slate-50 {
+  background-color: color-mix(in srgb, var(--card) 86%, var(--bg) 14%);
+}
+
+.bg-slate-100 {
+  background-color: color-mix(in srgb, var(--card) 74%, var(--bg) 26%);
+}
+
+.border-slate-200 {
+  border-color: var(--line);
+}
+
 .section-title {
   font-size: clamp(1.25rem, 1.8vw, 1.75rem);
   font-weight: 700;
@@ -81,6 +113,9 @@ img {
 }
 
 .primary-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 999px;
   background: var(--brand);
   color: white;
@@ -91,6 +126,9 @@ img {
 }
 
 .secondary-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 999px;
   background: var(--card);
   color: var(--fg);
@@ -134,6 +172,12 @@ select:focus-visible {
 .hero-panel {
   border: 1px solid #0f3960;
   background: linear-gradient(115deg, #0b355a 0%, #0a5ea8 60%, #1a74bf 100%);
+  color: #ffffff;
+}
+
+.hero-panel .pill {
+  border-color: rgba(255, 255, 255, 0.42);
+  background: rgba(255, 255, 255, 0.2);
   color: #ffffff;
 }
 

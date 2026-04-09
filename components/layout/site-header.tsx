@@ -3,13 +3,19 @@ import Link from "next/link";
 import { getCurrentSessionUser } from "@/server/auth/current-user";
 import { logoutAction } from "@/server/auth/actions";
 
-const links = [
+const desktopLinks = [
   { href: "/works", label: "作品一覧" },
-  { href: "/lp/reader", label: "読者LP" },
-  { href: "/lp/creator", label: "漫画家LP" },
+  { href: "/readers", label: "読者の方へ" },
+  { href: "/creators", label: "漫画家の方へ" },
   { href: "/tags/%E6%97%A5%E5%B8%B8", label: "タグ" },
   { href: "/library", label: "ライブラリ" },
   { href: "/dashboard", label: "投稿" },
+];
+
+const mobileQuickLinks = [
+  { href: "/readers", label: "読者の方へ" },
+  { href: "/creators", label: "漫画家の方へ" },
+  { href: "/works", label: "作品一覧" },
 ];
 
 export async function SiteHeader() {
@@ -20,12 +26,19 @@ export async function SiteHeader() {
       className="sticky top-0 z-30 border-b backdrop-blur-sm"
       style={{ backgroundColor: "var(--surface)", borderColor: "var(--line)" }}
     >
-      <div className="main-container flex h-16 items-center justify-between gap-3">
-        <Link href="/" className="flex items-center gap-2" aria-label="komado トップへ">
-          <Image src="/brand/logo-horizontal.png" alt="komado" width={140} height={56} priority />
+      <div className="main-container flex h-20 items-center justify-between gap-3">
+        <Link href="/" className="flex items-center" aria-label="komado トップへ">
+          <Image
+            src="/brand/logo-horizontal.svg"
+            alt="komado"
+            width={196}
+            height={78}
+            priority
+          />
         </Link>
-        <nav aria-label="グローバルナビゲーション" className="hidden gap-4 text-sm md:flex">
-          {links.map((link) => (
+
+        <nav aria-label="グローバルナビゲーション" className="hidden gap-3 text-sm md:flex">
+          {desktopLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
@@ -35,6 +48,7 @@ export async function SiteHeader() {
             </Link>
           ))}
         </nav>
+
         <div className="flex gap-2">
           {sessionUser ? (
             <>
@@ -52,12 +66,25 @@ export async function SiteHeader() {
               <Link className="secondary-btn text-sm" href="/login">
                 ログイン
               </Link>
-              <Link className="primary-btn hidden text-sm sm:inline-flex" href="/signup">
-                会員登録
+              <Link className="primary-btn text-sm" href="/signup">
+                登録
               </Link>
             </>
           )}
         </div>
+      </div>
+
+      <div className="main-container md:hidden">
+        <nav
+          aria-label="モバイルクイックリンク"
+          className="flex gap-2 overflow-x-auto pb-3 text-sm"
+        >
+          {mobileQuickLinks.map((link) => (
+            <Link key={link.href} href={link.href} className="secondary-btn shrink-0 text-xs">
+              {link.label}
+            </Link>
+          ))}
+        </nav>
       </div>
     </header>
   );
